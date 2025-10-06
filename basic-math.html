@@ -1,0 +1,39 @@
+import sympy as sp
+
+def basic_arithmetic():
+    print("Basic Arithmetic Mode:")
+    print("Supported operations: +, -, *, /")
+    expr = input("Enter an expression (e.g., 2 + 3 * 4): ")
+    try:
+        result = eval(expr, {"__builtins__": {}}, {})
+        print("Result:", result)
+    except Exception as e:
+        print("Error:", e)
+
+def advanced_math():
+    print("Advanced Math Mode:")
+    print("Describe your equation (e.g., integrate(sin(x), x), solve(x**2-4, x))")
+    expr = input("Enter SymPy-compatible expression: ")
+    try:
+        # Evaluate using sympy, with some common symbols and functions available
+        local_dict = {**sp.__dict__}
+        local_dict.update({"x": sp.Symbol("x"), "y": sp.Symbol("y"), "z": sp.Symbol("z")})
+        result = eval(expr, {"__builtins__": {}}, local_dict)
+        print("Result:", result)
+    except Exception as e:
+        print("Error:", e)
+
+def main():
+    print("=== Advanced Math Console ===")
+    print("1. Basic Arithmetic")
+    print("2. Advanced Math (descriptive equations)")
+    choice = input("Select option [1/2]: ")
+    if choice == '1':
+        basic_arithmetic()
+    elif choice == '2':
+        advanced_math()
+    else:
+        print("Invalid choice.")
+
+if __name__ == "__main__":
+    main()
