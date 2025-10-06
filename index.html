@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Animated Blue & White Shapes</title>
+  <style>
+    body {
+      background: #f5faff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      font-family: 'Segoe UI', Arial, sans-serif;
+    }
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+      justify-content: center;
+      align-items: center;
+      margin-top: 40px;
+    }
+    .block, .circle {
+      transition: box-shadow 0.3s;
+      box-shadow: 0 2px 16px rgba(0,40,120,0.09);
+      cursor: pointer;
+    }
+    .block {
+      width: 120px;
+      height: 120px;
+      border-radius: 32px;
+      background: linear-gradient(135deg, #0074d9 70%, #ffffff 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      animation: morphBlock 3s infinite alternate;
+    }
+    .circle {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #ffffff 50%, #0074d9 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      animation: morphCircle 3s infinite alternate;
+    }
+    .block:hover, .circle:hover {
+      box-shadow: 0 8px 32px rgba(0,40,120,0.18);
+      animation-play-state: paused;
+    }
+    @keyframes morphBlock {
+      0% { border-radius: 32px; transform: scale(1) rotate(0deg); }
+      50% { border-radius: 48px 16px 48px 16px; transform: scale(1.07) rotate(12deg); }
+      100% { border-radius: 32px; transform: scale(1) rotate(0deg); }
+    }
+    @keyframes morphCircle {
+      0% { border-radius: 50%; transform: scale(1) rotate(0deg); }
+      30% { border-radius: 60% 40% / 40% 60%; transform: scale(1.05) rotate(-15deg); }
+      70% { border-radius: 40% 60% / 60% 40%; transform: scale(0.95) rotate(15deg); }
+      100% { border-radius: 50%; transform: scale(1) rotate(0deg); }
+    }
+
+    /* Add some floating animated shapes in the background */
+    .floating {
+      position: absolute;
+      z-index: 0;
+      opacity: 0.14;
+      pointer-events: none;
+      animation: float 12s infinite linear;
+    }
+    .floating.shape1 {
+      left: 12vw; top: 18vh; width: 180px; height: 180px; border-radius: 60px 60px 90px 90px;
+      background: linear-gradient(145deg, #0074d9 80%, #fff 100%);
+      animation-delay: 0s;
+    }
+    .floating.shape2 {
+      right: 16vw; top: 30vh; width: 120px; height: 120px; border-radius: 50%;
+      background: radial-gradient(circle, #fff 60%, #0074d9 100%);
+      animation-delay: 2s;
+    }
+    .floating.shape3 {
+      left: 40vw; bottom: 14vh; width: 90px; height: 90px; border-radius: 50%;
+      background: linear-gradient(120deg, #fff 70%, #0074d9 100%);
+      animation-delay: 4s;
+    }
+    @keyframes float {
+      0% { transform: translateY(0) scale(1) rotate(0deg);}
+      25% { transform: translateY(-20px) scale(1.04) rotate(10deg);}
+      50% { transform: translateY(10px) scale(0.97) rotate(-8deg);}
+      75% { transform: translateY(-16px) scale(1.02) rotate(4deg);}
+      100% { transform: translateY(0) scale(1) rotate(0deg);}
+    }
+  </style>
+</head>
+<body>
+  <div class="floating shape1"></div>
+  <div class="floating shape2"></div>
+  <div class="floating shape3"></div>
+  <h1 style="color:#0074d9; margin-bottom:0;">Animated Blue & White Blocks and Circles</h1>
+  <p style="color:#333; margin-top:8px;">Modern, animated shapes with morphing effects</p>
+  <div class="container">
+    <div class="block"></div>
+    <div class="circle"></div>
+    <div class="block"></div>
+    <div class="circle"></div>
+  </div>
+</body>
+</html>
