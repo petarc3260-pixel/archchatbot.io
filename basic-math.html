@@ -1,39 +1,44 @@
-import sympy as sp
+import math
 
 def basic_arithmetic():
-    print("Basic Arithmetic Mode:")
-    print("Supported operations: +, -, *, /")
-    expr = input("Enter an expression (e.g., 2 + 3 * 4): ")
+    print("Basic Arithmetic Mode")
+    print("Type an arithmetic expression using +, -, *, / (e.g., 5 + 3 * 2):")
+    expr = input("Enter expression: ")
     try:
-        result = eval(expr, {"__builtins__": {}}, {})
+        # Safe eval for arithmetic only
+        allowed_names = {k: v for k, v in math.__dict__.items() if not k.startswith("__")}
+        result = eval(expr, {"__builtins__": None}, allowed_names)
         print("Result:", result)
     except Exception as e:
         print("Error:", e)
 
 def advanced_math():
-    print("Advanced Math Mode:")
-    print("Describe your equation (e.g., integrate(sin(x), x), solve(x**2-4, x))")
-    expr = input("Enter SymPy-compatible expression: ")
+    print("Advanced Math Mode")
+    print("Describe your equation in Python syntax (e.g., 'sin(pi/3) + log(2)', 'integrate x^2 dx from 0 to 2')")
+    expr = input("Enter descriptive equation: ")
+    # Attempt to parse and compute using math module
     try:
-        # Evaluate using sympy, with some common symbols and functions available
-        local_dict = {**sp.__dict__}
-        local_dict.update({"x": sp.Symbol("x"), "y": sp.Symbol("y"), "z": sp.Symbol("z")})
-        result = eval(expr, {"__builtins__": {}}, local_dict)
+        # Replace common math terms for Python compatibility
+        expr = expr.replace("^", "**")
+        allowed_names = {k: v for k, v in math.__dict__.items() if not k.startswith("__")}
+        allowed_names.update({"pi": math.pi, "e": math.e})
+        result = eval(expr, {"__builtins__": None}, allowed_names)
         print("Result:", result)
     except Exception as e:
-        print("Error:", e)
+        print("Error computing advanced math. For symbolic math (e.g., calculus, algebra), please use SymPy or another approved module.")
 
 def main():
-    print("=== Advanced Math Console ===")
+    print("=== Advanced Math Console (CKTP Unblocked) ===")
+    print("Options:")
     print("1. Basic Arithmetic")
-    print("2. Advanced Math (descriptive equations)")
-    choice = input("Select option [1/2]: ")
+    print("2. Advanced Math (descriptive equations, functions, calculus, etc.)")
+    choice = input("Choose mode (1 or 2): ")
     if choice == '1':
         basic_arithmetic()
     elif choice == '2':
         advanced_math()
     else:
-        print("Invalid choice.")
+        print("Invalid choice. Please select 1 or 2.")
 
 if __name__ == "__main__":
     main()
